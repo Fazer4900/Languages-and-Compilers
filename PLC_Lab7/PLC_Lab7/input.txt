@@ -1,0 +1,2 @@
+﻿int i,j,k;
+i = j = k = "penis";
