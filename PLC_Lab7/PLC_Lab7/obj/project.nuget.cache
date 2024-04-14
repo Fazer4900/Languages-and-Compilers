@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iA5m//C4eW357mEsG6lFRtOFNtn2Ajvqr4rxiS1t13cAHpf7r9UIC+uwh/9k5PT4jp/4mxL0bhm5qxLD4T3Jkw==",
+  "dgSpecHash": "oR+xeFoH3OK1y6ap+U6kYmr8mZ+tbrnVN4ElOD0aaEm/WmY+N9+/wD7xWkScg2ch+MH/eI1YiFbwLTVoXYqwNA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Fazer4900\\Desktop\\New folder (2)\\PLC_Lab7\\PLC_Lab7\\PLC_Lab7.csproj",
+  "projectFilePath": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\PLC_Lab7.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Fazer4900\\.nuget\\packages\\antlr4\\4.6.6\\antlr4.4.6.6.nupkg.sha512",
     "C:\\Users\\Fazer4900\\.nuget\\packages\\antlr4.codegenerator\\4.6.6\\antlr4.codegenerator.4.6.6.nupkg.sha512",

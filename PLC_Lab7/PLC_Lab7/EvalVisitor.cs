@@ -67,7 +67,7 @@ namespace PLC_Lab7
 
             if (result.Type == Type.Error) { return result; }
 
-            Console.WriteLine(result.Value);
+    //            Console.WriteLine(result.Value);
             return (Type.Null, null);
         }
 
@@ -664,11 +664,6 @@ namespace PLC_Lab7
             var symbol = variableDictionary[context.ID().Symbol];
             return (symbol.Type, symbol.Value);
         }
-
-    
-
-
-
 
         public override (Type Type, object Value) VisitLiteral([NotNull] PLC_Lab7_exprParser.LiteralContext context)
         {

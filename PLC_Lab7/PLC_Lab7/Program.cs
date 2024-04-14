@@ -23,31 +23,33 @@ namespace PLC_Lab7
             PLC_Lab7_exprParser parser = new PLC_Lab7_exprParser(tokens);
             
 
-            parser.AddErrorListener(new VerboseListener());
+           // parser.AddErrorListener(new VerboseListener());
             IParseTree tree = parser.program();
             
             if (parser.NumberOfSyntaxErrors == 0)
             {
-                Console.WriteLine("input Succesfully Parsed");          
+                //Console.WriteLine("input Succesfully Parsed");          
                 
                 var typeCheck = new EvalVisitor().Visit(tree);
                 if (typeCheck.Type != Type.Error)
                 {
-                    Console.WriteLine("input Sucesfully ErrorChecked");
-
-
+                  
+                   
+                    var stackBaseCode = new StackBasedCodeGeneratorVisitor().Visit(tree);
+                    Console.WriteLine(stackBaseCode);
 
 
                 }
                 else
                 {
-                    Console.WriteLine("Errors Found \n " + typeCheck.Value);
+                    //Console.WriteLine("Errors Found \n " + typeCheck.Value);
                 }
+                
                 
             }
             else
             {
-                Console.WriteLine("Input doesnt match the g4 grammar");
+                //Console.WriteLine("Input doesnt match the g4 grammar");
             }
 
             Console.ReadKey();
