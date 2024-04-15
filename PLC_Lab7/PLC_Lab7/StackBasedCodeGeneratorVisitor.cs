@@ -25,7 +25,7 @@ using System.Text;
             {
                 if (context.BOOL() != null)
                 {
-                    bool value = Convert.ToBoolean(context.BOOL().GetText());
+                    bool value = Convert.ToBoolean(context.BOOL().GetText());                    
                     return $"push B {value}\n";
                 }
                 else if (context.INT() != null)
