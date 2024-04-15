@@ -1,4 +1,24 @@
-﻿write "<Multiple Assignments>";
-int i,j,k;
-i=j=k=55;
-write "i=j=k=55: ",i,"=",j,"=",k;
+﻿if (3<4) write "condition was true";
+else write "condition was false";
+
+if (true) {
+	write "inside";
+	write "second";
+	write "if";
+}
+
+int a,b;
+
+while(a<10) {
+ write "a=",a;
+ a=a+1;
+}
+
+a=0;
+
+read b;
+
+while(a<b) {
+ write "a=",a,", b=",b;
+ a=a+1;
+}

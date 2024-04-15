@@ -495,6 +495,35 @@ namespace PLC_Lab7
                 return (Type.Error, "Incompatible types for equality comparison");
             }
         }
+
+        public override (Type Type, object Value) VisitGreater([NotNull] PLC_Lab7_exprParser.GreaterContext context)
+        {
+            var left = Visit(context.exp(0));
+            var right = Visit(context.exp(1));
+
+            if (left.Type == Type.Error || right.Type == Type.Error)
+            {
+                return (Type.Error, "Error in operand types");
+            }
+
+            if (left.Type == Type.Int && right.Type == Type.Int)
+            {
+                bool result = (int)left.Value > (int)right.Value;
+                return (Type.Bool, result);
+            }
+            else if ((left.Type == Type.Int && right.Type == Type.Float) || (left.Type == Type.Float && right.Type == Type.Int) || (left.Type == Type.Float && right.Type == Type.Float))
+            {
+                float leftValue = Convert.ToSingle(left.Value);
+                float rightValue = Convert.ToSingle(right.Value);
+                bool result = leftValue > rightValue;
+                return (Type.Bool, result);
+            }
+            else
+            {
+                return (Type.Error, "Incompatible types for comparison");
+            }
+        }
+
         public override (Type Type, object Value) VisitSmaller([NotNull] PLC_Lab7_exprParser.SmallerContext context)
         {
             var left = Visit(context.exp(0));
@@ -531,7 +560,11 @@ namespace PLC_Lab7
             {
                 return (Type.Error, "Error in operand types");
             }
-
+            else if(left.Type == right.Type) 
+            {
+                bool result = left.Value != right.Value;
+                return (left.Type, result);
+            }
             if (left.Type == Type.Int && right.Type == Type.Int)
             {
                 bool result = (int)left.Value != (int)right.Value;

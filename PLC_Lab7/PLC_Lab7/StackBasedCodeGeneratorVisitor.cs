@@ -118,46 +118,68 @@ using System.Text;
 
         bool oncePased =  false;
         public override string VisitAssignmentStatement(PLC_Lab7_exprParser.AssignmentStatementContext context)
+        {
+            string assignmentCode = "";
+
+            if (context.ID().Length == 1)
             {
-                string assignmentCode = "";            
 
                 foreach (var id in context.ID())
                 {
-
-                    var foundVariable = variableDictionary[id.Symbol];    
+                    var foundVariable = variableDictionary[id.Symbol];
                     Console.WriteLine(foundVariable.Type.ToString());
 
                     string variableName = id.GetText();
                     var exp = context.exp(0);
 
-                    var assigningtype = evalVisitor.Visit(exp);
-                   
-                
-                    if (!oncePased)
-                    {
-                        assignmentCode += Visit(exp);
-                        oncePased = true;
-                    }
-                
 
-                    
+                    var assigningtype = evalVisitor.Visit(exp);
+
+                    assignmentCode += Visit(exp);
                     if (foundVariable.Type == Type.Float && assigningtype.Type == Type.Int)
                     {
                         assignmentCode += "itof\n";
                     }
 
                     assignmentCode += $"save {variableName}\n";
-                    assignmentCode += $"load {variableName} \n";              
+                    assignmentCode += $"load {variableName} \n";
+                    assignmentCode += $"pop\n";
+                }
+            }
+            else
+            {
+                foreach (var id in context.ID().Reverse())
+                {
+                    var foundVariable = variableDictionary[id.Symbol];
+                    Console.WriteLine(foundVariable.Type.ToString());
+                    string variableName = id.GetText();
+                    var exp = context.exp(0);
+                    var assigningtype = evalVisitor.Visit(exp);
+                    if (!oncePased)
+                    {
+                        assignmentCode += Visit(exp);
+                        oncePased = true;
+                    }
+                    if (foundVariable.Type == Type.Float && assigningtype.Type == Type.Int)
+                    {
+                        assignmentCode += "itof\n";
+                    }
+                    assignmentCode += $"save {variableName}\n";
+                    assignmentCode += $"load {variableName} \n";
                 }
                 assignmentCode += $"pop\n";
-            oncePased = true;
-            return assignmentCode;
-
-                
-                
+                oncePased = true;
             }
+            return assignmentCode;                
+        }
 
-            public override string VisitWriteStatement(PLC_Lab7_exprParser.WriteStatementContext context)
+           
+                
+
+
+
+
+        public override string VisitWriteStatement(PLC_Lab7_exprParser.WriteStatementContext context)
             {               
                 string writeCode = "";
                 foreach (var exp in context.exprList().exp())
@@ -165,7 +187,7 @@ using System.Text;
                     string expressionCode = Visit(exp);
                     writeCode += expressionCode;
                 }
-                writeCode += "print " + context.exprList().exp().Length + "\n"; // Print all values at once
+                writeCode += "print " + context.exprList().exp().Length + "\n";
                 return writeCode;
             }
 
@@ -183,8 +205,6 @@ using System.Text;
 
             public override string VisitReadStatement(PLC_Lab7_exprParser.ReadStatementContext context)
             {
-                Console.WriteLine("pero pero pero peroooooooooooooooooooooooooooooooooooooooooooooooo");
-
                 string readCode = "";
                 foreach (var id in context.ID())
                 {
@@ -198,7 +218,7 @@ using System.Text;
 
         public override string VisitExp(PLC_Lab7_exprParser.ExpContext context)
         {
-            Console.WriteLine("pero pero pero");
+          
 
             if (context.ChildCount == 1)
             {
@@ -219,16 +239,10 @@ using System.Text;
                 {
                     var leftType = evalVisitor.Visit(context.GetChild(0));
                     var rightType = evalVisitor.Visit(context.GetChild(1));
-
-                   
-                    Console.WriteLine("penisssssss" + leftType.Type.ToString());
                     
                     var left = Visit(context.GetChild(0));
                     var op = context.GetChild(1).GetText();
                     var right = Visit(context.GetChild(2));
-
-
-
 
                     return $"{left}{right}{op}\n";
                 }
@@ -280,16 +294,16 @@ using System.Text;
                 string conditionCode = Visit(context.exp());
                 string thenCode = Visit(context.statement(0));
                 ifCode += conditionCode;
-                ifCode += "if_eq else_" + context.GetHashCode() + "\n";
+                ifCode += "fjmp " + context.GetHashCode() + "\n";
                 ifCode += thenCode;
-                ifCode += "goto endif_" + context.GetHashCode() + "\n";
-                ifCode += "else_" + context.GetHashCode() + ":\n";
+                ifCode += "jmp " + context.GetHashCode() + "\n";
+                ifCode += "label " + context.GetHashCode() + ":\n";
                 if (context.statement().Length > 1)
                 {
                     string elseCode = Visit(context.statement(1));
                     ifCode += elseCode;
                 }
-                ifCode += "endif_" + context.GetHashCode() + ":\n";
+                ifCode += "label " + context.GetHashCode() + ":\n";
                 return ifCode;
             }
 
@@ -299,12 +313,12 @@ using System.Text;
                 string conditionCode = Visit(context.exp());
                 string loopCode = Visit(context.statement());
 
-                whileCode += "while_start_" + context.GetHashCode() + ":\n";
+                whileCode += "label " + context.GetHashCode() + ":\n";
                 whileCode += conditionCode;
-                whileCode += "if_eq while_end_" + context.GetHashCode() + "\n";
+                whileCode += "fjmp " + context.GetHashCode() + "\n";
                 whileCode += loopCode;
-                whileCode += "goto while_start_" + context.GetHashCode() + "\n";
-                whileCode += "while_end_" + context.GetHashCode() + ":\n";
+                whileCode += "jmp " + context.GetHashCode() + "\n";
+                whileCode += "label " + context.GetHashCode() + ":\n";
 
                 return whileCode;
             }
@@ -395,15 +409,49 @@ using System.Text;
             }
             public override string VisitSmaller(PLC_Lab7_exprParser.SmallerContext context)
             {
+
                 var left = Visit(context.exp()[0]);
                 var right = Visit(context.exp()[1]);
-                return left + right + "lt\n";
+                string leftAddOn = "";
+                string rightAddOn = "";
+                var leftEpi = evalVisitor.Visit(context.exp()[0]);
+                var rightEpi = evalVisitor.Visit(context.exp()[1]);
+                if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
+                {
+                    leftAddOn = "itof\n";
+                }
+                if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
+                {
+                    rightAddOn = "itof\n";
+                }
+
+                return left + rightAddOn + right + leftAddOn + "lt\n";
+            }
+
+            public override string VisitGreater(PLC_Lab7_exprParser.GreaterContext context)
+            {
+                var left = Visit(context.exp()[0]);
+                var right = Visit(context.exp()[1]);
+                string leftAddOn = "";
+                string rightAddOn = "";
+                var leftEpi = evalVisitor.Visit(context.exp()[0]);
+                var rightEpi = evalVisitor.Visit(context.exp()[1]);
+                if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
+                {
+                    leftAddOn = "itof\n";
+                }
+                if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
+                {
+                    rightAddOn = "itof\n";
+                }
+
+                return left + rightAddOn + right + leftAddOn + "gt\n";
             }
             public override string VisitNotequal(PLC_Lab7_exprParser.NotequalContext context)
             {
                 var left = Visit(context.exp()[0]);
                 var right = Visit(context.exp()[1]);
-                return left + right + "not eq\n"; // idk whit this one
+                return left + right + "eq\nnot\n"; // idk whit this one
             }
             public override string VisitBinaryAnd(PLC_Lab7_exprParser.BinaryAndContext context)
             {
@@ -431,12 +479,12 @@ using System.Text;
         }
 
         public override string VisitLogicNot(PLC_Lab7_exprParser.LogicNotContext context)
-            {
-           
-                return "!\n";
-            }
+        {
+            var exp = Visit(context.exp());
+            return exp + "not\n";
+        }
 
-            public override string VisitLiteralExpr(PLC_Lab7_exprParser.LiteralExprContext context)
+        public override string VisitLiteralExpr(PLC_Lab7_exprParser.LiteralExprContext context)
             {
                 return Visit(context.literal()); // Add "pop" instruction after visiting literal expression
             }
