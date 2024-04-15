@@ -4,6 +4,7 @@ using Antlr4.Runtime.Tree;
 using System;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 
 namespace PLC_Lab7
@@ -28,32 +29,45 @@ namespace PLC_Lab7
             
             if (parser.NumberOfSyntaxErrors == 0)
             {
-                //Console.WriteLine("input Succesfully Parsed");          
+                Console.WriteLine("input Succesfully Parsed");          
                 
-                var typeCheck = new EvalVisitor().Visit(tree);
+                EvalVisitor visitor = new EvalVisitor();
+
+                var typeCheck = visitor.Visit(tree);
                 if (typeCheck.Type != Type.Error)
                 {
                   
                    
-                    var stackBaseCode = new StackBasedCodeGeneratorVisitor().Visit(tree);
-                    Console.WriteLine(stackBaseCode);
+                    var stackBaseCode = new StackBasedCodeGeneratorVisitor(visitor).Visit(tree);
+                    //Console.WriteLine(stackBaseCode);
 
-
+                    string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    string filePath = Path.Combine(directory, "gayresuklt.txt");
+                    try
+                    {
+                        // Write generated string to the file, overwriting existing content
+                        File.WriteAllText(filePath, stackBaseCode);
+                        //Console.WriteLine("Content of gayresuklt.txt has been created in the main project folder.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"An error occurred while writing to the file: {ex.Message}");
+                    }
                 }
                 else
                 {
-                    //Console.WriteLine("Errors Found \n " + typeCheck.Value);
+
+                    Console.WriteLine("Errors Found \n " + typeCheck.Value);
                 }
                 
                 
             }
             else
             {
-                //Console.WriteLine("Input doesnt match the g4 grammar");
+                Console.WriteLine("Input doesnt match the g4 grammar");
             }
 
-            Console.ReadKey();
-            
+           
         }
     }
 }

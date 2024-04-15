@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace PLC_Lab7
 {
+
     public class EvalVisitor : PLC_Lab7_exprBaseVisitor<(Type Type, object Value)>
     {
         VariableDictionary variableDictionary = new VariableDictionary();

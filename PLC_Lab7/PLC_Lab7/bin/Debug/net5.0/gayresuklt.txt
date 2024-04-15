@@ -7,17 +7,17 @@ save j
 push I 0
 save k
 push I 55
-save k
-load k
-save j
-load j
 save i
-load i
+load i 
+save j
+load j 
+save k
+load k 
 pop
 push S "i=j=k=55: "
-load i 
+load i
 push S "="
-load j 
+load j
 push S "="
-load k 
+load k
 print 6

@@ -1,0 +1,8 @@
+push S "Abcd"
+save s
+push S "s(Abcd): "
+push S "s"
+save s
+pop
+print 2
+
