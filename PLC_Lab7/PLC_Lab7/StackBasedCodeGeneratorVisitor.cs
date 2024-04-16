@@ -21,12 +21,20 @@ using System.Text;
             EvalVisitor evalVisitor;
             VariableDictionary variableDictionary = new VariableDictionary();
             
-          public override string VisitLiteral(PLC_Lab7_exprParser.LiteralContext context)
+            public override string VisitLiteral(PLC_Lab7_exprParser.LiteralContext context)
             {
                 if (context.BOOL() != null)
                 {
-                    bool value = Convert.ToBoolean(context.BOOL().GetText());                    
-                    return $"push B {value}\n";
+                    bool value = Convert.ToBoolean(context.BOOL().GetText());   
+                    if(value)
+                    {
+                        return $"push B true\n";
+                    }
+                    else
+                    {
+                        return $"push B false\n";
+                    }
+                   
                 }
                 else if (context.INT() != null)
                 {
@@ -44,7 +52,7 @@ using System.Text;
                     return $"push S {value}\n";
                 }
                 return "";
-            }
+        }
 
             public override string VisitProgram(PLC_Lab7_exprParser.ProgramContext context)
             {
@@ -113,9 +121,6 @@ using System.Text;
         }
 
 
-
-
-
         bool oncePased =  false;
         public override string VisitAssignmentStatement(PLC_Lab7_exprParser.AssignmentStatementContext context)
         {
@@ -173,47 +178,41 @@ using System.Text;
             return assignmentCode;                
         }
 
-           
-                
-
-
-
-
         public override string VisitWriteStatement(PLC_Lab7_exprParser.WriteStatementContext context)
-            {               
-                string writeCode = "";
-                foreach (var exp in context.exprList().exp())
-                {
-                    string expressionCode = Visit(exp);
-                    writeCode += expressionCode;
-                }
-                writeCode += "print " + context.exprList().exp().Length + "\n";
-                return writeCode;
-            }
-
-            public override string VisitExprList(PLC_Lab7_exprParser.ExprListContext context)
+        {               
+            string writeCode = "";
+            foreach (var exp in context.exprList().exp())
             {
-                string exprListCode = "";
-                foreach (var exp in context.exp())
-                {
-                    string expressionCode = Visit(exp);
-                    exprListCode += expressionCode;
-                }
-                return exprListCode;
+                string expressionCode = Visit(exp);
+                writeCode += expressionCode;
             }
+            writeCode += "print " + context.exprList().exp().Length + "\n";
+            return writeCode;
+        }
 
-
-            public override string VisitReadStatement(PLC_Lab7_exprParser.ReadStatementContext context)
+        public override string VisitExprList(PLC_Lab7_exprParser.ExprListContext context)
+        {
+            string exprListCode = "";
+            foreach (var exp in context.exp())
             {
-                string readCode = "";
-                foreach (var id in context.ID())
-                {
-                    string variableName = id.GetText();
-                    readCode += $"read {variableName}\n";
-                    readCode += $"save {variableName}\n";
-                }
-                return readCode;
+                string expressionCode = Visit(exp);
+                exprListCode += expressionCode;
             }
+            return exprListCode;
+        }
+
+
+        public override string VisitReadStatement(PLC_Lab7_exprParser.ReadStatementContext context)
+        {
+            string readCode = "";
+            foreach (var id in context.ID())
+            {
+                string variableName = id.GetText();
+                readCode += $"read {variableName}\n";
+                readCode += $"save {variableName}\n";
+            }
+            return readCode;
+        }
 
 
         public override string VisitExp(PLC_Lab7_exprParser.ExpContext context)
@@ -255,222 +254,222 @@ using System.Text;
         }
 
         public override string VisitParenthesis(PLC_Lab7_exprParser.ParenthesisContext context)
-            {
-                return Visit(context.exp());
-            }
-            public override string VisitMultiplication(PLC_Lab7_exprParser.MultiplicationContext context)
-            {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-
-                string leftAddOn = "";
-                string rightAddOn = "";
-                var leftEpi = evalVisitor.Visit(context.exp()[0]);
-                var rightEpi = evalVisitor.Visit(context.exp()[1]);
-                if(leftEpi.Type == Type.Float && rightEpi.Type == Type.Int) 
-                {
-                    leftAddOn = "itof\n";
-                }
-                if(leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
-                {
-                    rightAddOn = "itof\n";
-                }
-
-                return left + rightAddOn + right +leftAddOn+ "mul\n";
-            }
-            public override string VisitBlockStatement(PLC_Lab7_exprParser.BlockStatementContext context)
-            {
-                string blockCode = "";
-                foreach (var statement in context.statement())
-                {
-                    blockCode += Visit(statement);
-                }
-                return blockCode;
-            }
-
-            public override string VisitIfStatement(PLC_Lab7_exprParser.IfStatementContext context)
-            {
-                string ifCode = "";
-                string conditionCode = Visit(context.exp());
-                string thenCode = Visit(context.statement(0));
-                ifCode += conditionCode;
-                ifCode += "fjmp " + context.GetHashCode() + "\n";
-                ifCode += thenCode;
-                ifCode += "jmp " + context.GetHashCode() + "\n";
-                ifCode += "label " + context.GetHashCode() + ":\n";
-                if (context.statement().Length > 1)
-                {
-                    string elseCode = Visit(context.statement(1));
-                    ifCode += elseCode;
-                }
-                ifCode += "label " + context.GetHashCode() + ":\n";
-                return ifCode;
-            }
-
-            public override string VisitWhileStatement(PLC_Lab7_exprParser.WhileStatementContext context)
-            {
-                string whileCode = "";
-                string conditionCode = Visit(context.exp());
-                string loopCode = Visit(context.statement());
-
-                whileCode += "label " + context.GetHashCode() + ":\n";
-                whileCode += conditionCode;
-                whileCode += "fjmp " + context.GetHashCode() + "\n";
-                whileCode += loopCode;
-                whileCode += "jmp " + context.GetHashCode() + "\n";
-                whileCode += "label " + context.GetHashCode() + ":\n";
-
-                return whileCode;
-            }
-
-            public override string VisitDivision(PLC_Lab7_exprParser.DivisionContext context)
-            {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                string leftAddOn = "";
-                string rightAddOn = "";
-                var leftEpi = evalVisitor.Visit(context.exp()[0]);
-                var rightEpi = evalVisitor.Visit(context.exp()[1]);
-                if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
-                {
-                    leftAddOn = "itof\n";
-                }
-                if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
-                {
-                    rightAddOn = "itof\n";
-                }
-
-                return left + rightAddOn + right + leftAddOn + "div\n";
+        {
+            return Visit(context.exp());
         }
-            public override string VisitModulo(PLC_Lab7_exprParser.ModuloContext context)
-            {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                string leftAddOn = "";
-                string rightAddOn = "";
-                var leftEpi = evalVisitor.Visit(context.exp()[0]);
-                var rightEpi = evalVisitor.Visit(context.exp()[1]);
-                if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
-                {
-                    leftAddOn = "itof\n";
-                }
-                if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
-                {
-                    rightAddOn = "itof\n";
-                }
+        public override string VisitMultiplication(PLC_Lab7_exprParser.MultiplicationContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
 
-                return left + rightAddOn + right + leftAddOn + "mod\n";
+            string leftAddOn = "";
+            string rightAddOn = "";
+            var leftEpi = evalVisitor.Visit(context.exp()[0]);
+            var rightEpi = evalVisitor.Visit(context.exp()[1]);
+            if(leftEpi.Type == Type.Float && rightEpi.Type == Type.Int) 
+            {
+                leftAddOn = "itof\n";
+            }
+            if(leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
+            {
+                rightAddOn = "itof\n";
             }
 
-            public override string VisitAddition(PLC_Lab7_exprParser.AdditionContext context)
+            return left + rightAddOn + right +leftAddOn+ "mul\n";
+        }
+        public override string VisitBlockStatement(PLC_Lab7_exprParser.BlockStatementContext context)
+        {
+            string blockCode = "";
+            foreach (var statement in context.statement())
             {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                string leftAddOn = "";
-                string rightAddOn = "";
-                var leftEpi = evalVisitor.Visit(context.exp()[0]);
-                var rightEpi = evalVisitor.Visit(context.exp()[1]);
-                if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
-                {
-                    leftAddOn = "itof\n";
-                }
-                if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
-                {
-                    rightAddOn = "itof\n";
-                }
-
-                return left + rightAddOn + right + leftAddOn + "add\n";
+                blockCode += Visit(statement);
+            }
+            return blockCode;
         }
 
-            public override string VisitSubtraction(PLC_Lab7_exprParser.SubtractionContext context)
+        public override string VisitIfStatement(PLC_Lab7_exprParser.IfStatementContext context)
+        {
+            string ifCode = "";
+            string conditionCode = Visit(context.exp());
+            string thenCode = Visit(context.statement(0));
+            ifCode += conditionCode;
+            ifCode += "fjmp " + context.GetHashCode() + "\n";
+            ifCode += thenCode;
+            ifCode += "jmp " + context.GetHashCode() + "\n";
+            ifCode += "label " + context.GetHashCode() + ":\n";
+            if (context.statement().Length > 1)
             {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                string leftAddOn = "";
-                string rightAddOn = "";
-                var leftEpi = evalVisitor.Visit(context.exp()[0]);
-                var rightEpi = evalVisitor.Visit(context.exp()[1]);
-                if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
-                {
-                    leftAddOn = "itof\n";
-                }
-                if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
-                {
-                    rightAddOn = "itof\n";
-                }
-
-                return left + rightAddOn + right + leftAddOn + "sub\n";
+                string elseCode = Visit(context.statement(1));
+                ifCode += elseCode;
+            }
+            ifCode += "label " + context.GetHashCode() + ":\n";
+            return ifCode;
         }
-            public override string VisitEqual(PLC_Lab7_exprParser.EqualContext context)
-            {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                return left + right + "eq\n";
-            }
-            public override string VisitSmaller(PLC_Lab7_exprParser.SmallerContext context)
-            {
 
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                string leftAddOn = "";
-                string rightAddOn = "";
-                var leftEpi = evalVisitor.Visit(context.exp()[0]);
-                var rightEpi = evalVisitor.Visit(context.exp()[1]);
-                if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
-                {
-                    leftAddOn = "itof\n";
-                }
-                if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
-                {
-                    rightAddOn = "itof\n";
-                }
+        public override string VisitWhileStatement(PLC_Lab7_exprParser.WhileStatementContext context)
+        {
+            string whileCode = "";
+            string conditionCode = Visit(context.exp());
+            string loopCode = Visit(context.statement());
 
-                return left + rightAddOn + right + leftAddOn + "lt\n";
+            whileCode += "label " + context.GetHashCode() + ":\n";
+            whileCode += conditionCode;
+            whileCode += "fjmp " + context.GetHashCode() + "\n";
+            whileCode += loopCode;
+            whileCode += "jmp " + context.GetHashCode() + "\n";
+            whileCode += "label " + context.GetHashCode() + ":\n";
+
+            return whileCode;
+        }
+
+        public override string VisitDivision(PLC_Lab7_exprParser.DivisionContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            string leftAddOn = "";
+            string rightAddOn = "";
+            var leftEpi = evalVisitor.Visit(context.exp()[0]);
+            var rightEpi = evalVisitor.Visit(context.exp()[1]);
+            if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
+            {
+                leftAddOn = "itof\n";
+            }
+            if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
+            {
+                rightAddOn = "itof\n";
             }
 
-            public override string VisitGreater(PLC_Lab7_exprParser.GreaterContext context)
+            return left + rightAddOn + right + leftAddOn + "div\n";
+        }
+        public override string VisitModulo(PLC_Lab7_exprParser.ModuloContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            string leftAddOn = "";
+            string rightAddOn = "";
+            var leftEpi = evalVisitor.Visit(context.exp()[0]);
+            var rightEpi = evalVisitor.Visit(context.exp()[1]);
+            if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
             {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                string leftAddOn = "";
-                string rightAddOn = "";
-                var leftEpi = evalVisitor.Visit(context.exp()[0]);
-                var rightEpi = evalVisitor.Visit(context.exp()[1]);
-                if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
-                {
-                    leftAddOn = "itof\n";
-                }
-                if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
-                {
-                    rightAddOn = "itof\n";
-                }
+                leftAddOn = "itof\n";
+            }
+            if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
+            {
+                rightAddOn = "itof\n";
+            }
 
-                return left + rightAddOn + right + leftAddOn + "gt\n";
-            }
-            public override string VisitNotequal(PLC_Lab7_exprParser.NotequalContext context)
+            return left + rightAddOn + right + leftAddOn + "mod\n";
+        }
+
+        public override string VisitAddition(PLC_Lab7_exprParser.AdditionContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            string leftAddOn = "";
+            string rightAddOn = "";
+            var leftEpi = evalVisitor.Visit(context.exp()[0]);
+            var rightEpi = evalVisitor.Visit(context.exp()[1]);
+            if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
             {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                return left + right + "eq\nnot\n"; // idk whit this one
+                leftAddOn = "itof\n";
             }
-            public override string VisitBinaryAnd(PLC_Lab7_exprParser.BinaryAndContext context)
+            if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
             {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                return left + right + "and\n";
+                rightAddOn = "itof\n";
             }
-            public override string VisitBinaryOr(PLC_Lab7_exprParser.BinaryOrContext context)
+
+            return left + rightAddOn + right + leftAddOn + "add\n";
+        }
+
+        public override string VisitSubtraction(PLC_Lab7_exprParser.SubtractionContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            string leftAddOn = "";
+            string rightAddOn = "";
+            var leftEpi = evalVisitor.Visit(context.exp()[0]);
+            var rightEpi = evalVisitor.Visit(context.exp()[1]);
+            if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
             {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                return left + right + "or\n";
+                leftAddOn = "itof\n";
             }
-            public override string VisitConcatenate(PLC_Lab7_exprParser.ConcatenateContext context)
+            if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
             {
-                var left = Visit(context.exp()[0]);
-                var right = Visit(context.exp()[1]);
-                return left + right + "concat\n";
+                rightAddOn = "itof\n";
             }
+
+            return left + rightAddOn + right + leftAddOn + "sub\n";
+        }
+        public override string VisitEqual(PLC_Lab7_exprParser.EqualContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            return left + right + "eq\n";
+        }
+        public override string VisitSmaller(PLC_Lab7_exprParser.SmallerContext context)
+        {
+
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            string leftAddOn = "";
+            string rightAddOn = "";
+            var leftEpi = evalVisitor.Visit(context.exp()[0]);
+            var rightEpi = evalVisitor.Visit(context.exp()[1]);
+            if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
+            {
+                leftAddOn = "itof\n";
+            }
+            if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
+            {
+                rightAddOn = "itof\n";
+            }
+
+            return left + rightAddOn + right + leftAddOn + "lt\n";
+        }
+
+        public override string VisitGreater(PLC_Lab7_exprParser.GreaterContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            string leftAddOn = "";
+            string rightAddOn = "";
+            var leftEpi = evalVisitor.Visit(context.exp()[0]);
+            var rightEpi = evalVisitor.Visit(context.exp()[1]);
+            if (leftEpi.Type == Type.Float && rightEpi.Type == Type.Int)
+            {
+                leftAddOn = "itof\n";
+            }
+            if (leftEpi.Type == Type.Int && rightEpi.Type == Type.Float)
+            {
+                rightAddOn = "itof\n";
+            }
+
+            return left + rightAddOn + right + leftAddOn + "gt\n";
+        }
+        public override string VisitNotequal(PLC_Lab7_exprParser.NotequalContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            return left + right + "eq\nnot\n"; // idk whit this one
+        }
+        public override string VisitBinaryAnd(PLC_Lab7_exprParser.BinaryAndContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            return left + right + "and\n";
+        }
+        public override string VisitBinaryOr(PLC_Lab7_exprParser.BinaryOrContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            return left + right + "or\n";
+        }
+        public override string VisitConcatenate(PLC_Lab7_exprParser.ConcatenateContext context)
+        {
+            var left = Visit(context.exp()[0]);
+            var right = Visit(context.exp()[1]);
+            return left + right + "concat\n";
+        }
 
         public override string VisitUnaryMinus(PLC_Lab7_exprParser.UnaryMinusContext context)
         {
@@ -485,9 +484,9 @@ using System.Text;
         }
 
         public override string VisitLiteralExpr(PLC_Lab7_exprParser.LiteralExprContext context)
-            {
-                return Visit(context.literal()); // Add "pop" instruction after visiting literal expression
-            }
+        {
+            return Visit(context.literal());
+        }
 
             public override string VisitID(PLC_Lab7_exprParser.IDContext context)
             {
