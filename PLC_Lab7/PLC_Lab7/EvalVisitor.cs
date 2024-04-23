@@ -15,7 +15,7 @@ namespace PLC_Lab7
 
     public class EvalVisitor : PLC_Lab7_exprBaseVisitor<(Type Type, object Value)>
     {
-        VariableDictionary variableDictionary = new VariableDictionary();
+        public VariableDictionary variableDictionary = new VariableDictionary();
             
         // takže pro každý statement visitni
         public override (Type Type, object Value) VisitProgram([NotNull] PLC_Lab7_exprParser.ProgramContext context)
@@ -146,55 +146,26 @@ namespace PLC_Lab7
             foreach(var id in context.ID())
             {
                 var variable = variableDictionary[id.Symbol];
-                              
-
-                string input = Console.ReadLine();
-
+                  
                 switch (variable.Type)                 
-                { 
-                
+                {                 
                     case Type.Int:
-                       int number = 0;
-                       if(int.TryParse(input,out number))
-                       {
-                            variableDictionary[id.Symbol] = (Type.Int, number);                            
-                       }
-                       else
-                       {
-                            return (Type.Error, $"Entering non int value to int, variable named {id.GetText()}");
-                       }
+                       int number = 0;                   
+                            variableDictionary[id.Symbol] = (Type.Int, 0);
                     break;
-                    case Type.Float:
-                        float floatNumber;
-                        if (float.TryParse(input, out floatNumber))
-                        {
-                            variableDictionary[id.Symbol] = (Type.Float, floatNumber);
-                        }
-                        else
-                        {
-                            return (Type.Error, $"Entering nonfloat value ito float, variable named {id.GetText()}");
-                        }
+                    case Type.Float:                      
+                            variableDictionary[id.Symbol] = (Type.Float, 0.0);     
                     break;
-                    case Type.Bool:
-                        bool boolState;
-                        if (bool.TryParse(input, out boolState))
-                        {
-                            variableDictionary[id.Symbol] = (Type.Bool, boolState);
-                        }
-                        else
-                        {
-                            return (Type.Error, $"Entering nonbool value to bool, variable named {id.GetText()}");
-                        }
+                    case Type.Bool:                      
+                            variableDictionary[id.Symbol] = (Type.Bool, true);                     
                     break;
-                        case Type.String:
-                        variableDictionary[id.Symbol] = (Type.String, input);
+                    case Type.String:
+                        variableDictionary[id.Symbol] = (Type.String, "");
                         break;
                     default:
                         return (Type.Error, "Unsupported format in VisitReadStatement");
-
                 }
-
-            }
+                            }
             return (Type.Null, 0);
         }
 

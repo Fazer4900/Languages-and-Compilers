@@ -1,12 +1,8 @@
 ﻿
-write "<Input - a(int),b(float),c(string),d(bool)>";
-int a;
-float b;
-string c;
-bool e;
-a = 0;
-b = 0.0;
-c = "";
-e = true;
-read a,b,c,e;
-write "a,b,c,e: ", a, ",", b, ",", c, ",",e;
+int a,b;
+
+while(1 < 5) {
+ write "a=",a;
+ a=a+1;
+}
+

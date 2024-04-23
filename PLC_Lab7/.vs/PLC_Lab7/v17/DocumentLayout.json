@@ -3,28 +3,48 @@
   "WorkspaceRootPath": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\stackbasedcodegeneratorvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\stackbasedcodegeneratorvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\vm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\vm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\expectedresult.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\expectedresult.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\stringtypevariabledictionary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\stringtypevariabledictionary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\input.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\plc_lab7_expr.g4||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\plc_lab7_expr.g4||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\stackbasedcodegeneratorvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\stackbasedcodegeneratorvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\variabledictionary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\variabledictionary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\evalvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\evalvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\plc_lab7_expr.g4||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\plc_lab7_expr.g4||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\obj\\debug\\net5.0\\plc_lab7_exprbasevisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\obj\\debug\\net5.0\\plc_lab7_exprbasevisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\obj\\debug\\net5.0\\plc_lab7_exprvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\obj\\debug\\net5.0\\plc_lab7_exprvisitor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|d:\\school\\pjp\\languages-and-compilers\\plc_lab7\\plc_lab7\\expectedresult.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{ACE398D4-7CA9-4AA9-B15F-69F3E7FD0B66}|PLC_Lab7\\PLC_Lab7.csproj|solutionrelative:plc_lab7\\expectedresult.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +54,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
@@ -44,61 +64,89 @@
               "RelativeDocumentMoniker": "PLC_Lab7\\input.txt",
               "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\input.txt",
               "RelativeToolTip": "PLC_Lab7\\input.txt",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-04-13T14:04:18.066Z",
+              "WhenOpened": "2024-04-16T17:13:38.684Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "expectedResult.txt",
-              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\expectedResult.txt",
-              "RelativeDocumentMoniker": "PLC_Lab7\\expectedResult.txt",
-              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\expectedResult.txt",
-              "RelativeToolTip": "PLC_Lab7\\expectedResult.txt",
-              "ViewState": "AQIAAHUAAAAAAAAAAAAqwKwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-04-15T16:01:33.617Z",
+              "Title": "stringTypeVariableDictionary.cs",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\stringTypeVariableDictionary.cs",
+              "RelativeDocumentMoniker": "PLC_Lab7\\stringTypeVariableDictionary.cs",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\stringTypeVariableDictionary.cs",
+              "RelativeToolTip": "PLC_Lab7\\stringTypeVariableDictionary.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwB8AAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T07:12:44.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "VariableDictionary.cs",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\VariableDictionary.cs",
+              "RelativeDocumentMoniker": "PLC_Lab7\\VariableDictionary.cs",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\VariableDictionary.cs",
+              "RelativeToolTip": "PLC_Lab7\\VariableDictionary.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAqwCEAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T07:07:08.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PLC_Lab7_exprBaseVisitor.cs",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\obj\\Debug\\net5.0\\PLC_Lab7_exprBaseVisitor.cs",
+              "RelativeDocumentMoniker": "PLC_Lab7\\obj\\Debug\\net5.0\\PLC_Lab7_exprBaseVisitor.cs",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\obj\\Debug\\net5.0\\PLC_Lab7_exprBaseVisitor.cs",
+              "RelativeToolTip": "PLC_Lab7\\obj\\Debug\\net5.0\\PLC_Lab7_exprBaseVisitor.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAtwCMAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T06:38:03.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PLC_Lab7_exprVisitor.cs",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\obj\\Debug\\net5.0\\PLC_Lab7_exprVisitor.cs",
+              "RelativeDocumentMoniker": "PLC_Lab7\\obj\\Debug\\net5.0\\PLC_Lab7_exprVisitor.cs",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\obj\\Debug\\net5.0\\PLC_Lab7_exprVisitor.cs",
+              "RelativeToolTip": "PLC_Lab7\\obj\\Debug\\net5.0\\PLC_Lab7_exprVisitor.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAtwCEAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T06:38:02.407Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "StackBasedCodeGeneratorVisitor.cs",
-              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\StackBasedCodeGeneratorVisitor.cs",
-              "RelativeDocumentMoniker": "PLC_Lab7\\StackBasedCodeGeneratorVisitor.cs",
-              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\StackBasedCodeGeneratorVisitor.cs",
-              "RelativeToolTip": "PLC_Lab7\\StackBasedCodeGeneratorVisitor.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Title": "VM.cs",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\VM.cs",
+              "RelativeDocumentMoniker": "PLC_Lab7\\VM.cs",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\VM.cs",
+              "RelativeToolTip": "PLC_Lab7\\VM.cs",
+              "ViewState": "AQIAAB8BAAAAAAAAAAAcwDYBAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-14T09:42:55.349Z",
+              "WhenOpened": "2024-04-16T15:54:53.175Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "PLC_Lab7_expr.g4",
-              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\PLC_Lab7_expr.g4",
-              "RelativeDocumentMoniker": "PLC_Lab7\\PLC_Lab7_expr.g4",
-              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\PLC_Lab7_expr.g4",
-              "RelativeToolTip": "PLC_Lab7\\PLC_Lab7_expr.g4",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAAEQAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-04-15T15:36:18.435Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EvalVisitor.cs",
-              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\EvalVisitor.cs",
-              "RelativeDocumentMoniker": "PLC_Lab7\\EvalVisitor.cs",
-              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\EvalVisitor.cs",
-              "RelativeToolTip": "PLC_Lab7\\EvalVisitor.cs",
-              "ViewState": "AQIAABQAAAAAAAAAAAAQwBIAAAAMAAAA",
+              "Title": "StackBasedCodeGeneratorVisitor.cs",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\StackBasedCodeGeneratorVisitor.cs",
+              "RelativeDocumentMoniker": "PLC_Lab7\\StackBasedCodeGeneratorVisitor.cs",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\StackBasedCodeGeneratorVisitor.cs",
+              "RelativeToolTip": "PLC_Lab7\\StackBasedCodeGeneratorVisitor.cs",
+              "ViewState": "AQIAAFwBAAAAAAAAAAAmwGYBAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-15T14:11:32.922Z"
+              "WhenOpened": "2024-04-14T09:42:55.349Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -108,9 +156,49 @@
               "RelativeDocumentMoniker": "PLC_Lab7\\Program.cs",
               "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\Program.cs",
               "RelativeToolTip": "PLC_Lab7\\Program.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAAAkwCkAAAAWAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-01T18:21:28.501Z"
+              "WhenOpened": "2024-04-01T18:21:28.501Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PLC_Lab7_expr.g4",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\PLC_Lab7_expr.g4",
+              "RelativeDocumentMoniker": "PLC_Lab7\\PLC_Lab7_expr.g4",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\PLC_Lab7_expr.g4",
+              "RelativeToolTip": "PLC_Lab7\\PLC_Lab7_expr.g4",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-04-15T15:36:18.435Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EvalVisitor.cs",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\EvalVisitor.cs",
+              "RelativeDocumentMoniker": "PLC_Lab7\\EvalVisitor.cs",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\EvalVisitor.cs",
+              "RelativeToolTip": "PLC_Lab7\\EvalVisitor.cs",
+              "ViewState": "AQIAAP0AAAAAAAAAAAAAwBgBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-15T14:11:32.922Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "expectedResult.txt",
+              "DocumentMoniker": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\expectedResult.txt",
+              "RelativeDocumentMoniker": "PLC_Lab7\\expectedResult.txt",
+              "ToolTip": "D:\\school\\PJP\\Languages-and-Compilers\\PLC_Lab7\\PLC_Lab7\\expectedResult.txt",
+              "RelativeToolTip": "PLC_Lab7\\expectedResult.txt",
+              "ViewState": "AQIAAH4AAAAAAAAAAAAiwKwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-04-15T16:01:33.617Z",
+              "EditorCaption": ""
             }
           ]
         }

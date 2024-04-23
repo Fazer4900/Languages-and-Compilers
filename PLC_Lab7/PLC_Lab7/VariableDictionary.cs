@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PLC_Lab7
 {
-    internal class VariableDictionary
+    public class VariableDictionary
     {
-        Dictionary<string, (Type Type, object Value)> internalDictionary = new Dictionary<string, (Type Type, object Value)>();
+        public Dictionary<string, (Type Type, object Value)> internalDictionary = new Dictionary<string, (Type Type, object Value)>();
 
         public (Type Type, object Value) Add(Type type, IToken variable)
         {

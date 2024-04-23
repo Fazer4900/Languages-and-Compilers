@@ -3,6 +3,7 @@ using Antlr4.Runtime.Tree;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+using System.Reflection.Emit;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
     using System.Threading.Tasks;
@@ -204,12 +205,36 @@ using System.Text;
 
         public override string VisitReadStatement(PLC_Lab7_exprParser.ReadStatementContext context)
         {
-            string readCode = "";
+            string readCode = "";  
+                    
             foreach (var id in context.ID())
             {
                 string variableName = id.GetText();
-                readCode += $"read {variableName}\n";
+
+                var returnValue = this.evalVisitor.variableDictionary[id.Symbol];
+
+                string type = "";
+
+                if (returnValue.Type == Type.Int)
+                {
+                    type = "I";
+                }
+                if (returnValue.Type == Type.String)
+                {
+                    type = "S";
+                }
+                if (returnValue.Type == Type.Float)
+                {
+                    type = "F";
+                }
+                if (returnValue.Type == Type.Bool)
+                {
+                    type = "B";
+                }
+
+                readCode += $"read {type}\n";
                 readCode += $"save {variableName}\n";
+
             }
             return readCode;
         }
@@ -287,22 +312,30 @@ using System.Text;
             return blockCode;
         }
 
+        private int labelCounter = 0;
+
         public override string VisitIfStatement(PLC_Lab7_exprParser.IfStatementContext context)
         {
             string ifCode = "";
             string conditionCode = Visit(context.exp());
             string thenCode = Visit(context.statement(0));
+
+            int label1 = labelCounter;
+            labelCounter++;
+            int label2 = labelCounter;
+            labelCounter++;
+
             ifCode += conditionCode;
-            ifCode += "fjmp " + context.GetHashCode() + "\n";
+            ifCode += "fjmp " + label1 + "\n";
             ifCode += thenCode;
-            ifCode += "jmp " + context.GetHashCode() + "\n";
-            ifCode += "label " + context.GetHashCode() + ":\n";
+            ifCode += "jmp " + label2 + "\n";
+            ifCode += "label " + label1 + "\n";
             if (context.statement().Length > 1)
             {
                 string elseCode = Visit(context.statement(1));
                 ifCode += elseCode;
             }
-            ifCode += "label " + context.GetHashCode() + ":\n";
+            ifCode += "label " + label2 + "\n";
             return ifCode;
         }
 
@@ -312,14 +345,19 @@ using System.Text;
             string conditionCode = Visit(context.exp());
             string loopCode = Visit(context.statement());
 
-            whileCode += "label " + context.GetHashCode() + ":\n";
-            whileCode += conditionCode;
-            whileCode += "fjmp " + context.GetHashCode() + "\n";
-            whileCode += loopCode;
-            whileCode += "jmp " + context.GetHashCode() + "\n";
-            whileCode += "label " + context.GetHashCode() + ":\n";
+            int label1 = labelCounter;
+            labelCounter++;
+            int label2 = labelCounter;
+            labelCounter++;
+                       
+            string condition = conditionCode;
 
-            return whileCode;
+
+            string body = "";
+            body += loopCode;
+            body += "jmp " + label1 + "\n";
+            return "label " + label1 + "\n" + condition + "fjmp " + label2 + "\n" + body + "label " + label2 + "\n" ;
+
         }
 
         public override string VisitDivision(PLC_Lab7_exprParser.DivisionContext context)

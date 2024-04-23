@@ -22,51 +22,30 @@ namespace PLC_Lab7
             PLC_Lab7_exprLexer lexer = new PLC_Lab7_exprLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             PLC_Lab7_exprParser parser = new PLC_Lab7_exprParser(tokens);
+            VM virtualMachine = new VM();
             
-
-           // parser.AddErrorListener(new VerboseListener());
-            IParseTree tree = parser.program();
-            
+            IParseTree tree = parser.program();            
             if (parser.NumberOfSyntaxErrors == 0)
-            {
-                Console.WriteLine("input Succesfully Parsed");          
-                
+            {      
                 EvalVisitor visitor = new EvalVisitor();
-
                 var typeCheck = visitor.Visit(tree);
                 if (typeCheck.Type != Type.Error)
                 {
-                  
-                   
                     var stackBaseCode = new StackBasedCodeGeneratorVisitor(visitor).Visit(tree);
-                    //Console.WriteLine(stackBaseCode);
 
-                    string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                    string filePath = Path.Combine(directory, "gayresuklt.txt");
-                    try
-                    {
-                        // Write generated string to the file, overwriting existing content
-                        File.WriteAllText(filePath, stackBaseCode);
-                        //Console.WriteLine("Content of gayresuklt.txt has been created in the main project folder.");
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"An error occurred while writing to the file: {ex.Message}");
-                    }
+                    Console.WriteLine(stackBaseCode);
+                    Console.WriteLine("----------------");
+                    virtualMachine.run(stackBaseCode);                  
                 }
                 else
                 {
-
                     Console.WriteLine("Errors Found \n " + typeCheck.Value);
-                }
-                
-                
+                }             
             }
             else
             {
                 Console.WriteLine("Input doesnt match the g4 grammar");
             }
-
            
         }
     }
